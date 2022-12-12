@@ -1,0 +1,4 @@
+{
+    "git" :  { "host" : "github.com", "port" : "22", "type" : "ssh" },
+    "gitlab" :  { "host" : "gitlab.com", "port" : "443", "type" : "https" }
+}
