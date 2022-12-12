@@ -52,6 +52,7 @@ if __name__ == "__main__":
         with open("resources.json", "r") as file:
             resources = json.load(file)
     except:
+        print("Input data error!")
         exit(-1)
     if resources != {}:
         while True:
