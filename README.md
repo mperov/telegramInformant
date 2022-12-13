@@ -1,7 +1,7 @@
 # telegramInformant
 ## Description
 
-It helps to know what your remote resources are run
+It helps to know what your remote resources are available
 
 ## Requirements
 At first I recommend to create special Python virtual enviroment by
