@@ -70,6 +70,7 @@ if __name__ == "__main__":
         print("Input data error!")
         exit(-1)
     if resources != {}:
+        bot.send_message(GROUP_ID, "Hello! I'm Telegram bot! It's my first running! I'll notify you if your hosts will be unavailable!")
         while True:
             routine(resources)
             sleep(GLOBAL_TIMEOUT)
