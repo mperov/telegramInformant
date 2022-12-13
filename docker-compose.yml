@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+    informant:
+        image: telegram-informant
+        build:
+            context: .
+            dockerfile: ./Dockerfile
