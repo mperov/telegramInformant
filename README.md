@@ -4,7 +4,7 @@
 It helps to know what your remote resources are run
 
 ## Requirements
-At first I recomend to create special Python virtual env by
+At first I recommend to create special Python virtual enviroment by
 ```console
 $ sudo apt-get install python3-venv -y
 $ python3 -m venv telegramInformant
