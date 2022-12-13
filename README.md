@@ -25,6 +25,8 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
+**If it's all right you will receive greetings message from bot.**
+
 ## Typical startup
 
 ### Requirements
