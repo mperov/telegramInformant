@@ -1,7 +1,7 @@
 # telegramInformant
 ## Description
 
-It helps to know what your remote resources are available
+It helps to know what your remote resources are unavailable
 
 ## Docker startup
 
