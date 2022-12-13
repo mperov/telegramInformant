@@ -48,6 +48,19 @@ def check_host(ip, port):
 def alert(hostname, _socket):
     bot.send_message(GROUP_ID, "ALERT: " + hostname + "( " + _socket + " ) isn't available!")
 
+def routine(resources):
+    for hostname in resources:
+        res = resources[hostname]
+        _socket = res['host'] + ":" + res['port']
+        if res['type'] in ['https', 'http']:
+            try:
+                response = requests.get(res['type'] + "://" + _socket, timeout=30)
+            except:
+                alert(hostname, res['type'] + "://" + _socket)
+        else:
+            if not check_host(res['host'], res['port']):
+                alert(hostname, _socket)
+
 if __name__ == "__main__":
     resources = {}
     try:
@@ -58,15 +71,5 @@ if __name__ == "__main__":
         exit(-1)
     if resources != {}:
         while True:
-            for hostname in resources:
-                res = resources[hostname]
-                _socket = res['host'] + ":" + res['port']
-                if res['type'] in ['https', 'http']:
-                    try:
-                        response = requests.get(res['type'] + "://" + _socket, timeout=30)
-                    except:
-                        alert(hostname, res['type'] + "://" + _socket)
-                else:
-                    if not check_host(res['host'], res['port']):
-                        alert(hostname, _socket)
+            routine(resources)
             sleep(GLOBAL_TIMEOUT)
