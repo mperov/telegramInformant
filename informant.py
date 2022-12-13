@@ -13,7 +13,9 @@ from time import sleep
 
 TOKEN=''
 GROUP_ID=''
-TIMEOUT=60*10 # 10 minutes
+GLOBAL_TIMEOUT=60*10 # 10 minutes
+CONNECT_TIMEOUT=3
+ATTEMTS=5
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -35,12 +37,12 @@ def opened(ip, port):
 
 def check_host(ip, port):
     ipup = False
-    for i in range(5):
+    for i in range(ATTEMTS):
         if opened(ip, port):
             ipup = True
             break
         else:
-            sleep(3)
+            sleep(CONNECT_TIMEOUT)
     return ipup
 
 def alert(hostname, _socket):
@@ -67,4 +69,4 @@ if __name__ == "__main__":
                 else:
                     if not check_host(res['host'], res['port']):
                         alert(hostname, _socket)
-            sleep(TIMEOUT)
+            sleep(GLOBAL_TIMEOUT)
