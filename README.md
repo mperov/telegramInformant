@@ -43,7 +43,7 @@ If you don't have pip3 then you may install it [how described here](https://pip.
 ### Usage
 
 The first change file `resources.json` that contains all remote hosts which will being checked.  
-The second Add token of your Telegram bot in `informant.py` by changing variable TOKEN and add recipient by modifiying GROUP_ID.  
+The second add token of your Telegram bot in `informant.py` by changing variable TOKEN and add recipient by modifiying GROUP_ID.  
 Finally
 ```console
 $ source telegramInformant/bin/activate
