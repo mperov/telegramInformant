@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 #
-# Copyright (c) 2022 Maksim Perov <coder@frtk.ru>
+# Copyright (c) 2023 Maksim Perov <coder@frtk.ru>
 #
 
 import telebot
@@ -45,21 +45,37 @@ def check_host(ip, port):
             sleep(CONNECT_TIMEOUT)
     return ipup
 
-def alert(hostname, _socket):
-    bot.send_message(GROUP_ID, "ALERT: " + hostname + "( " + _socket + " ) isn't available!")
+def alert(hostname, _socket, available = False):
+    if not available:
+        postfix = " ) isn't available!"
+    else:
+        postfix = " ) is available!"
+    bot.send_message(GROUP_ID, "ALERT: " + hostname + "( " + _socket + postfix)
 
 def routine(resources):
     for hostname in resources:
         res = resources[hostname]
+        if not 'available' in res:
+            res.update({'available' : True})
         _socket = res['host'] + ":" + res['port']
         if res['type'] in ['https', 'http']:
             try:
                 response = requests.get(res['type'] + "://" + _socket, timeout=30)
+                if not res['available']:
+                    alert(hostname, _socket, True)
+                    res['available'] = True
             except:
-                alert(hostname, res['type'] + "://" + _socket)
+                if res['available']:
+                    alert(hostname, res['type'] + "://" + _socket)
+                    res['available'] = False
         else:
             if not check_host(res['host'], res['port']):
-                alert(hostname, _socket)
+                if res['available']:
+                    alert(hostname, _socket)
+                    res['available'] = False
+            elif not res['available']:
+                alert(hostname, _socket, True)
+                res['available'] = True
 
 if __name__ == "__main__":
     resources = {}
